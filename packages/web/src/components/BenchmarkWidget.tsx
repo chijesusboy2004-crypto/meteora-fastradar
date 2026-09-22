@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Activity, Gauge, Cpu, CheckCircle2 } from "lucide-react";
 import { StreamBenchmark } from "../types";
 
@@ -10,7 +10,7 @@ export const BenchmarkWidget: React.FC<BenchmarkProps> = ({ benchmark }) => {
   const rpcFast = benchmark ? benchmark.rpcFastLatencyMs : 142;
   const standardRpc = benchmark ? benchmark.standardRpcLatencyMs : 980;
   const improvement = benchmark ? benchmark.improvementPercent : 82.4;
-  const eventsPerSec = benchmark ? benchmark.eventsProcessedPerSec : 16.5;
+  const eventsPerSec = benchmark ? Number(benchmark.eventsProcessedPerSec).toFixed(1) : "16.2";
 
   return (
     <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl mb-6">
@@ -22,7 +22,7 @@ export const BenchmarkWidget: React.FC<BenchmarkProps> = ({ benchmark }) => {
           <div>
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               RPC Fast Stream Infrastructure
-              <span className="text-[10px] bg-solana-green/20 text-solana-green px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] bg-solana-green/20 text-solana-green px-2 py-0.5 rounded-full font-mono font-semibold">
                 Frankfurt (FRA-1)
               </span>
             </h3>
@@ -38,20 +38,18 @@ export const BenchmarkWidget: React.FC<BenchmarkProps> = ({ benchmark }) => {
             <span>Throughput:</span>
             <span className="text-white font-bold">{eventsPerSec} events/s</span>
           </div>
-          <div className="flex items-center space-x-1.5 text-emerald-400">
+          <div className="flex items-center space-x-1.5 text-emerald-400 font-semibold">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Sub-slot Confirmation</span>
           </div>
         </div>
       </div>
 
-      {/* Latency Comparison Bars */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3.5">
-        {/* RPC Fast Bar */}
         <div className="bg-slate-950/60 rounded-xl p-3 border border-emerald-500/20">
           <div className="flex justify-between items-center text-xs mb-1.5">
             <span className="font-semibold text-emerald-400 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               RPC Fast (Optimized gRPC Stream)
             </span>
             <span className="font-mono font-bold text-emerald-400">{rpcFast} ms</span>
@@ -64,7 +62,6 @@ export const BenchmarkWidget: React.FC<BenchmarkProps> = ({ benchmark }) => {
           </div>
         </div>
 
-        {/* Standard Public RPC Bar */}
         <div className="bg-slate-950/60 rounded-xl p-3 border border-slate-800">
           <div className="flex justify-between items-center text-xs mb-1.5">
             <span className="text-slate-400 flex items-center gap-1.5">

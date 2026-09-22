@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { TrendingUp, Layers, Info, CheckCircle } from "lucide-react";
 import { MeteoraPool } from "../types";
 
@@ -9,7 +9,7 @@ interface CurveVisualizerProps {
 export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
   if (!pool) {
     return (
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center text-slate-500">
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center text-slate-500 font-mono text-xs">
         Select a Meteora pool to inspect its dynamic bonding curve
       </div>
     );
@@ -18,7 +18,6 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
   const { curve, token } = pool;
   const currentProgress = curve.progressPercent;
 
-  // Generate SVG curve points for visual presentation
   const points = [];
   const width = 500;
   const height = 220;
@@ -26,7 +25,6 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
 
   for (let i = 0; i <= 20; i++) {
     const xRatio = i / 20;
-    // Exponential curve y = x^1.8
     const yRatio = Math.pow(xRatio, 1.8);
     const x = padding + xRatio * (width - 2 * padding);
     const y = height - padding - yRatio * (height - 2 * padding);
@@ -35,7 +33,6 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
 
   const curvePath = `M ${points.join(" L ")}`;
 
-  // Position of current active point
   const currentRatio = Math.min(1, currentProgress / 100);
   const activeX = padding + currentRatio * (width - 2 * padding);
   const activeY = height - padding - Math.pow(currentRatio, 1.8) * (height - 2 * padding);
@@ -46,8 +43,8 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
         <div>
           <h3 className="text-sm font-bold text-white flex items-center gap-2">
             Dynamic Bonding Curve: {token.name} (${token.symbol})
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-solana-purple/20 text-solana-purple border border-solana-purple/30">
-              $k = V_{"\\{sol\\}"} \\times V_{"\\{token\\}"}$
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-solana-purple/20 text-solana-purple border border-solana-purple/30 font-semibold">
+              k = V_sol × V_token
             </span>
           </h3>
           <p className="text-xs text-slate-400">
@@ -61,7 +58,6 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
         </div>
       </div>
 
-      {/* SVG Mathematical Curve Plot */}
       <div className="relative w-full h-[220px] bg-slate-950/70 rounded-xl border border-slate-850 p-2 overflow-hidden mb-4">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full">
           <defs>
@@ -76,34 +72,28 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
             </linearGradient>
           </defs>
 
-          {/* Grid lines */}
           <line x1={padding} y1={height - padding} x2={width - padding} y2={height - padding} stroke="#1E293B" strokeWidth="1" />
           <line x1={padding} y1={padding} x2={padding} y2={height - padding} stroke="#1E293B" strokeWidth="1" />
           <line x1={padding} y1={(height - padding) / 2} x2={width - padding} y2={(height - padding) / 2} stroke="#1E293B" strokeDasharray="3,3" strokeWidth="1" />
 
-          {/* Curve fill area */}
           <path
             d={`${curvePath} L ${width - padding},${height - padding} L ${padding},${height - padding} Z`}
             fill="url(#areaGradient)"
           />
 
-          {/* Main Curve */}
           <path d={curvePath} fill="none" stroke="url(#curveGradient)" strokeWidth="3.5" strokeLinecap="round" />
 
-          {/* Active Current Position Point */}
           <circle cx={activeX} cy={activeY} r="7" fill="#14F195" className="animate-pulse shadow-lg" />
           <circle cx={activeX} cy={activeY} r="12" fill="#14F195" opacity="0.3" />
 
-          {/* Target Milestone Marker */}
           <circle cx={width - padding} cy={padding} r="4" fill="#00E5FF" />
-          <text x={width - padding - 60} y={padding + 14} fill="#00E5FF" fontSize="10" fontFamily="monospace">
+          <text x={width - padding - 75} y={padding + 14} fill="#00E5FF" fontSize="10" fontFamily="monospace">
             DLMM Graduation
           </text>
         </svg>
 
-        {/* Floating Indicator */}
         <div
-          className="absolute text-[11px] font-mono font-bold bg-slate-900/90 text-solana-green border border-solana-green/40 px-2 py-1 rounded shadow-lg backdrop-blur-sm pointer-events-none"
+          className="absolute text-[11px] font-mono font-bold bg-slate-900/90 text-solana-green border border-solana-green/40 px-2.5 py-1 rounded-lg shadow-lg backdrop-blur-sm pointer-events-none"
           style={{
             left: `${Math.min(75, Math.max(10, (activeX / width) * 100))}%`,
             top: "20%"
@@ -113,7 +103,6 @@ export const CurveVisualizer: React.FC<CurveVisualizerProps> = ({ pool }) => {
         </div>
       </div>
 
-      {/* Metrics Breakdown Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
         <div className="bg-slate-950/50 p-2.5 rounded-xl border border-slate-800">
           <span className="text-[11px] text-slate-500 block">Real SOL Reserves</span>

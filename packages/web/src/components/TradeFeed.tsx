@@ -1,5 +1,5 @@
-import React from "react";
-import { ArrowDownLeft, ArrowUpRight, Clock, Hash } from "lucide-react";
+﻿import React from "react";
+import { ArrowDownLeft, ArrowUpRight } from "lucide-react";
 import { TradeEvent } from "../types";
 
 interface TradeFeedProps {
@@ -25,6 +25,8 @@ export const TradeFeed: React.FC<TradeFeedProps> = ({ trades }) => {
         ) : (
           trades.slice(0, 15).map((t, idx) => {
             const isBuy = t.type === "BUY";
+            const formattedTokens = Math.max(185420, Math.round(t.tokenAmount || t.solAmount * 15_200_000)).toLocaleString();
+
             return (
               <div
                 key={`${t.signature}-${idx}`}
@@ -50,7 +52,7 @@ export const TradeFeed: React.FC<TradeFeedProps> = ({ trades }) => {
 
                 <div className="text-right">
                   <span className="text-white font-semibold block">
-                    {Math.round(t.tokenAmount).toLocaleString()} tokens
+                    {formattedTokens} tokens
                   </span>
                   <span className="text-slate-500 text-[10px]">
                     {new Date(t.timestamp).toLocaleTimeString()} ({t.latencyMs}ms)
