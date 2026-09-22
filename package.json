@@ -1,0 +1,20 @@
+{
+  "name": "meteora-fastradar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "High-throughput real-time streaming engine & radar for Meteora Dynamic Bonding Curves (DBC) powered by RPC Fast",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=@fastradar/engine\" \"npm run dev --workspace=@fastradar/web\"",
+    "build": "npm run build --workspaces",
+    "start": "node packages/engine/dist/index.js",
+    "test": "npm run test --workspaces"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "author": "Chibiko Chidera Pelumi & FastRadar Core Contributors",
+  "license": "MIT"
+}
