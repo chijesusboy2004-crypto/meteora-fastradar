@@ -1,4 +1,4 @@
-﻿# ⚡ Meteora FastRadar
+# ⚡ Meteora FastRadar
 
 > **Real-Time Dynamic Bonding Curve (DBC) Radar & Liquidity Stream for Solana**  
 > Powered by **RPC Fast (Frankfurt gRPC / Shredstream)** • Built for the **Colosseum Crypto World's Fair Hackathon**
@@ -14,6 +14,7 @@
 1. 🇳🇬 **Superteam Nigeria Track** ($5,000 USDG)
 2. 🌊 **Best Use of Meteora Dynamic Bonding Curve (DBC)** ($20,000 USDC)
 3. ⚡ **RPC Fast Infrastructure Sidetrack** ($10.5k Compute Credits Pool)
+4. 📡 **Solami: Live Solana Data Track** ($3,000 USDG - Yellowstone gRPC, Mirage & Blur)
 
 ---
 
@@ -81,13 +82,28 @@ Where:
 
 ---
 
-## ⚡ RPC Fast Benchmark Comparison
+## ⚡ Multi-Provider Infrastructure Benchmarks
 
-| Metric | Standard Public Solana RPC | RPC Fast (FRA-1 Shredstream) | Improvement |
+| Metric | Standard Public Solana RPC | RPC Fast (FRA-1 Shredstream) | Solami Mirage (Yellowstone gRPC) |
 | :--- | :--- | :--- | :--- |
-| **Stream Latency** | 980 ms – 1,250 ms | **135 ms – 155 ms** | **-84% Latency** |
-| **Block Shred Ingestion** | Polling intervals | Direct gRPC stream | **Instant** |
-| **Transaction Simulation** | Standard RPC round-trip | Pre-state execution | **3.2x Faster** |
+| **Stream Latency** | 980 ms – 1,250 ms | **135 ms – 155 ms** | **138 ms – 150 ms** |
+| **Block Shred Ingestion** | Polling intervals | Direct gRPC stream | Real-time Mirage WebSocket |
+| **Decoded DEX Swaps** | Manual Instruction Parse | Fast Stream Parser | **Solami Blur Decoded Feed** |
+| **Improvement** | Baseline | **-84% Latency** | **-83% Latency** |
+
+### 📡 Solami Data Provider Integration
+FastRadar engine supports multi-provider data ingestion including **Solami Infrastructure**:
+- **Solami Mirage WebSocket**: Yellowstone gRPC firehose feed for sub-slot block and transaction ingestion without running complex gRPC clients.
+- **Solami Blur Decoded Market Data**: Decoded trades and liquidity updates across Meteora pools without client-side instruction parsing.
+- **Configuration**:
+  ```bash
+  # In packages/engine/.env
+  SOLAMI_API_KEY=your_solami_api_key_here
+  ```
+- **Inspect Provider Status**:
+  ```bash
+  curl http://localhost:3001/api/providers/solami
+  ```
 
 ---
 

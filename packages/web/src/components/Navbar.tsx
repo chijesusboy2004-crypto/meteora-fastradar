@@ -11,7 +11,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ benchmark, connected, onConnectWallet }) => {
   return (
     <header className="border-b border-slate-800/80 bg-[#0B0F19]/90 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3.5">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="w-full max-w-[1840px] mx-auto flex items-center justify-between">
         {/* Brand & Track Badges */}
         <div className="flex items-center space-x-3.5">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-meteora-teal via-solana-purple to-solana-green p-0.5 flex items-center justify-center shadow-lg shadow-meteora-teal/10">

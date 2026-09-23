@@ -4,6 +4,7 @@ import http from "http";
 import { WebSocketServer, WebSocket } from "ws";
 import { MeteoraSimulator } from "./simulator.js";
 import { BondingCurveMath } from "./curveMath.js";
+import { SolamiProvider } from "./providers/solami.js";
 
 export function createServer(port: number = 3001) {
   const app = express();
@@ -13,6 +14,8 @@ export function createServer(port: number = 3001) {
   const server = http.createServer(app);
   const wss = new WebSocketServer({ server });
   const simulator = new MeteoraSimulator();
+  const solamiProvider = new SolamiProvider();
+  solamiProvider.connect();
 
   // Active WebSocket clients
   const clients = new Set<WebSocket>();
@@ -48,9 +51,14 @@ export function createServer(port: number = 3001) {
     res.json({
       status: "healthy",
       service: "Meteora FastRadar Engine",
-      network: "Solana Mainnet-Beta (RPC Fast FRA-1)",
+      network: "Solana Mainnet-Beta (RPC Fast FRA-1 & Solami Mirage)",
+      providers: ["RPC Fast", "Solami Mirage", "Public RPC"],
       timestamp: Date.now()
     });
+  });
+
+  app.get("/api/providers/solami", (req, res) => {
+    res.json(solamiProvider.getEndpointInfo());
   });
 
   app.get("/api/pools", (req, res) => {

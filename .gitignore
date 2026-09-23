@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 dist/
 .env
 .env.local
@@ -8,3 +8,14 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 Thumbs.db
+*.mp4
+*.webm
+*.mp3
+*.py
+*.txt
+recordings/
+recordings*/
+__pycache__/
+*.jpg
+*.png
+

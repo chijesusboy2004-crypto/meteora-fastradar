@@ -121,7 +121,7 @@ export function App() {
         onConnectWallet={() => setWalletConnected(!walletConnected)}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
+      <main className="flex-1 w-full max-w-[1840px] mx-auto px-6 py-6">
         {/* Hackathon Banner */}
         <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-solana-purple/20 via-meteora-teal/10 to-solana-green/20 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center space-x-3">
